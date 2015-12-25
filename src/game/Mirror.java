@@ -6,11 +6,13 @@ public class Mirror implements gamePieces{
 	public Mirror(String orientation) {
 		_orientation = orientation;
 	}
-
-
+	
+	public String getOrientation() {
+		return _orientation;
+	}
+	
 	@Override
 	public void moveUp() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -45,9 +47,7 @@ public class Mirror implements gamePieces{
 		// TODO Auto-generated method stub
 		
 	}
-	
-
-	
+		
 	
 	/** Orientation on board. */
 	private String _orientation;
