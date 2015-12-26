@@ -15,10 +15,17 @@ public class Board {
 	public void set(gamePieces piece, int r, int c) {
 		_gameBoard[r][c] = piece;
 	}
+	
+	public gamePieces get(int r, int c) {
+		return _gameBoard[r][c];
+	}
 		
 	/** Print game board. */
 	public void printBoard() {
+		System.out.print("  " + "0" + " " + "1" + " " + "2" + " " + "3");
+		System.out.println();
 		for (int r = 0; r < 4; r +=1) {
+			System.out.print(r + " ");
 			for (int c = 0; c < 4; c +=1) {
 				if (_gameBoard[r][c] == null) {
 					System.out.print("-");
