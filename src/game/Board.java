@@ -19,6 +19,51 @@ public class Board {
 	public gamePieces get(int r, int c) {
 		return _gameBoard[r][c];
 	}
+	
+	public void moveUp(int r, int c) {
+		if ((!(_gameBoard[r][c] == null)) && (r > 0) && _gameBoard[r-1][c] == null){
+			gamePieces movingPiece = _gameBoard[r][c];
+			_gameBoard[r][c] = null;
+			_gameBoard[r - 1][c] = movingPiece;
+		} else {
+			System.out.println("Invalid move!");
+		}
+	}
+	
+	public void moveDown(int r, int c) {
+		if ((!(_gameBoard[r][c] == null)) && (r < 3) && _gameBoard[r+1][c] == null){
+			gamePieces movingPiece = _gameBoard[r][c];
+			_gameBoard[r][c] = null;
+			_gameBoard[r+1][c] = movingPiece;
+		} else {
+			System.out.println("Invalid move!");
+		}
+	}
+	
+	public void moveLeft(int r, int c) {
+		if ((!(_gameBoard[r][c] == null)) && (c > 0) && _gameBoard[r][c-1] == null){
+			gamePieces movingPiece = _gameBoard[r][c];
+			_gameBoard[r][c] = null;
+			_gameBoard[r][c-1] = movingPiece;
+		} else {
+			System.out.println("Invalid move!");
+		}
+	}
+	
+	public void moveRight(int r, int c){
+		if ((!(_gameBoard[r][c] == null)) && (c < 3) && _gameBoard[r][c+1] == null){
+			gamePieces movingPiece = _gameBoard[r][c];
+			_gameBoard[r][c] = null;
+			_gameBoard[r][c+1] = movingPiece;
+		} else {
+			System.out.println("Invalid move!");
+		}
+	}
+	
+	public void rotatePiece(int r, int c){
+		gamePieces rotatingPiece = (gamePieces) _gameBoard[r][c]; 
+		rotatingPiece.rotate();
+	}
 		
 	/** Print game board. */
 	public void printBoard() {

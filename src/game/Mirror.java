@@ -10,42 +10,14 @@ public class Mirror implements gamePieces{
 	public String getOrientation() {
 		return _orientation;
 	}
-	
-	@Override
-	public void moveUp() {
-		
-	}
 
 
-
-	@Override
-	public void moveLeft() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void moveRight() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void moveDown() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
 	public void rotate() {
-		// TODO Auto-generated method stub
-		
+		if (_orientation.equals("left")) {
+			_orientation = "right";
+		} else if (_orientation.equals("right")) {
+			_orientation = "left";
+		}
 	}
 		
 	
