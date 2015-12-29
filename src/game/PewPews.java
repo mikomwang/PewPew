@@ -4,11 +4,17 @@ public class PewPews implements gamePieces{
 
 	public PewPews(int player) {
 		if (player == 1) {
+			_player = player;
 			_orientation = "up";
 		}
 		if (player == 2) {
+			_player = player;
 			_orientation = "down";
 		}
+	}
+	
+	public int getPlayer() {
+		return _player;
 	}
 	
 	public String getOrientation() {
@@ -35,5 +41,6 @@ public class PewPews implements gamePieces{
 		}
 	}
 
+	private int _player;
 	private String _orientation;
 }

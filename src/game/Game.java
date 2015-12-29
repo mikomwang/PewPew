@@ -29,12 +29,29 @@ public class Game {
      *  and return true.  Otherwise, return false. */
     private void processCommand(String line) {
     	String[] move = line.split("\\s+");
+    	if (move.length == 3) {
+    		if ((!(Integer.parseInt(move[1]) <= 3)) && (!(Integer.parseInt(move[1]) >= 0))
+				&& (!(Integer.parseInt(move[2]) <= 3)) && (!(Integer.parseInt(move[2]) >= 0))) {
+    			System.out.println("Coordinates out of range!");
+    			return;
+    		}
+    	} else if (move.length == 1) {
+    		if (! ((move[0].equals("help")) || (move[0].equals("P")))) {
+    			System.out.println("Invalid commands! Try \"help\"");
+    			return;
+    		}
+    	} else {
+    		System.out.println("Invalid commands!");
+    		return;
+    	}
+    	
     	switch (move[0]) {
     	case "help":
     		System.out.println("____________________________________________________");
-    		System.out.print(" + Commands will be in form of <ACTION><ROW><COLUMN> \n"
+    		System.out.print(" + Commands will be in form of <ACTION>[<ROW>][<COLUMN>] \n"
     				+ " + Pieces will be located by their ROW and COLUMN.\n"
-    				+ " + The two ACTIONS consists of ROTATE and MOVE. \n"
+    				+ " + The two game ACTIONS consists of ROTATE and MOVE. \n"
+    				+ " + You may print the board using \"P\". \n"
     				+ " + Indicate ROTATE using action command \"R\". \n"
     				+ " + MOVES are keyed as: MU (Move up) \n"
     				+ " 		       MD (Move down)\n"
@@ -58,8 +75,15 @@ public class Game {
     		_board.moveLeft((Integer.parseInt(move[1])), Integer.parseInt(move[2]));
     		_board.printBoard();
     		return;
-    	case "R":
+    	case "R": case "rotate": case "r":
+    		if (_board.get((Integer.parseInt(move[1])), Integer.parseInt(move[2])) == null) {
+    			System.out.println("Nothing there to rotate!");
+    			return;
+    		}
     		_board.rotatePiece((Integer.parseInt(move[1])), Integer.parseInt(move[2]));
+    		_board.printBoard();
+    		return;
+    	case "P":
     		_board.printBoard();
     		return;
     	default:
@@ -73,6 +97,7 @@ public class Game {
 	public void initialize() { 
 		PewPews player1 = new PewPews(1);
 		PewPews player2 = new PewPews(2);
+		_turn  = 1;
 		Mirror mirror1 = new Mirror("left");
 		Mirror mirror2 = new Mirror("right");
 		Mirror mirror3 = new Mirror("left");
@@ -87,6 +112,38 @@ public class Game {
 	}
 	
 	
+	// DONT FORGET TO SWITCH TURNS
+	public int findPlayerRow() {
+		for (int r = 0; r < 4; r += 1) {
+			for (int c = 0; c < 4; c +=1 ){
+				gamePieces currPiece = _board.get(r, c);
+				if (currPiece instanceof PewPews) {
+					if (((PewPews) currPiece).getPlayer() == _turn) {
+						System.out.println(r);
+						return r;
+					}
+				}
+			}
+		}
+		return _turn; //dummy
+	}
+	
+	public int findPlayerCol() {
+		for (int r = 0; r < 4; r += 1) {
+			for (int c = 0; c < 4; c +=1 ){
+				gamePieces currPiece = _board.get(r, c);
+				if (currPiece instanceof PewPews) {
+					if (((PewPews) currPiece).getPlayer() == _turn) {
+						System.out.println(c);
+						return c;
+					}
+				}
+			}
+		}
+		return _turn;
+	}
+	
+	private int _turn;
 	
 	private Board _board;
 	
