@@ -62,18 +62,22 @@ public class Game {
     	case "MU":
     		_board.moveUp((Integer.parseInt(move[1])), Integer.parseInt(move[2]));
     		_board.printBoard();
+    		shoot();
     		return;
     	case "MD":
     		_board.moveDown((Integer.parseInt(move[1])), Integer.parseInt(move[2]));
     		_board.printBoard();
+    		shoot();
     		return;
     	case "MR":
     		_board.moveRight((Integer.parseInt(move[1])), Integer.parseInt(move[2]));
     		_board.printBoard();
+    		shoot();
     		return;
     	case "ML":
     		_board.moveLeft((Integer.parseInt(move[1])), Integer.parseInt(move[2]));
     		_board.printBoard();
+    		shoot();
     		return;
     	case "R": case "rotate": case "r":
     		if (_board.get((Integer.parseInt(move[1])), Integer.parseInt(move[2])) == null) {
@@ -82,6 +86,7 @@ public class Game {
     		}
     		_board.rotatePiece((Integer.parseInt(move[1])), Integer.parseInt(move[2]));
     		_board.printBoard();
+    		shoot();
     		return;
     	case "P":
     		_board.printBoard();
@@ -109,6 +114,14 @@ public class Game {
 		_board.set(mirror3, 2, 2);
 		_board.set(mirror4, 2, 1);
 		_board.printBoard();
+	}
+	
+	public void shoot() {
+		int shooterRow = findPlayerRow();
+		int shooterCol = findPlayerCol();
+		PewPews shooter = (PewPews) _board.get(shooterRow, shooterCol);
+		String direction = shooter.getOrientation();
+		
 	}
 	
 	
